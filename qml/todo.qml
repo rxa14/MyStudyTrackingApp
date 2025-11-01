@@ -185,7 +185,7 @@ Page {
         // Filter controls
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 60
+            Layout.preferredHeight: 80
             color: "white"
             radius: 15
 
