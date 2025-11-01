@@ -1,0 +1,17 @@
+--bare
+-I
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug
+-I
+/home/icebankyouu/Qt/6.8.1/gcc_64/qml
+--resource
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/.qt/rcc/qmake_lemonStudys.qrc
+--resource
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/.qt/rcc/applemonStudys_raw_qml_0.qrc
+/home/icebankyouu/lemonStudys/qml/MainMenu.qml
+/home/icebankyouu/lemonStudys/qml/PomodoroView.qml
+/home/icebankyouu/lemonStudys/qml/todo.qml
+/home/icebankyouu/lemonStudys/qml/test.qml
+/home/icebankyouu/lemonStudys/qml/WelcomeScreen.qml
+/home/icebankyouu/lemonStudys/qml/streaks.qml
+--json
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_qmllint.json

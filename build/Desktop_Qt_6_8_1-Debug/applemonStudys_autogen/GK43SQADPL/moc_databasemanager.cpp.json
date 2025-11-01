@@ -1,0 +1,96 @@
+{
+    "classes": [
+        {
+            "className": "DatabaseManager",
+            "lineNumber": 11,
+            "methods": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "createStreaksTable",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "title",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "streakDuration",
+                            "type": "int"
+                        },
+                        {
+                            "name": "bestStreak",
+                            "type": "int"
+                        },
+                        {
+                            "name": "lastActivity",
+                            "type": "QDateTime"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "saveStreak",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "loadAllStreaks",
+                    "returnType": "QList<QVariantMap>"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        },
+                        {
+                            "name": "title",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "streakDuration",
+                            "type": "int"
+                        },
+                        {
+                            "name": "bestStreak",
+                            "type": "int"
+                        },
+                        {
+                            "name": "lastActivity",
+                            "type": "QDateTime"
+                        }
+                    ],
+                    "index": 3,
+                    "name": "updateStreak",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "id",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "deleteStreak",
+                    "returnType": "bool"
+                }
+            ],
+            "object": true,
+            "qualifiedClassName": "DatabaseManager",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "databasemanager.h",
+    "outputRevision": 68
+}

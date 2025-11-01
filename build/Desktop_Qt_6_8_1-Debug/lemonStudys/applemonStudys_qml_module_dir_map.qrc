@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/lemonStudys">/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/lemonStudys</file>
+
+  </qresource>
+</RCC>

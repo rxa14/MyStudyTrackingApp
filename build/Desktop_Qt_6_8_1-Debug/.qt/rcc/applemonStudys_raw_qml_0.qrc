@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="/qt/qml/lemonStudys/">
+    <file alias="qml/MainMenu.qml">/home/icebankyouu/lemonStudys/qml/MainMenu.qml</file>
+    <file alias="qml/PomodoroView.qml">/home/icebankyouu/lemonStudys/qml/PomodoroView.qml</file>
+    <file alias="qml/todo.qml">/home/icebankyouu/lemonStudys/qml/todo.qml</file>
+    <file alias="qml/test.qml">/home/icebankyouu/lemonStudys/qml/test.qml</file>
+    <file alias="qml/WelcomeScreen.qml">/home/icebankyouu/lemonStudys/qml/WelcomeScreen.qml</file>
+    <file alias="qml/streaks.qml">/home/icebankyouu/lemonStudys/qml/streaks.qml</file>
+    <file alias="fonts/Fredoka.ttf">/home/icebankyouu/lemonStudys/fonts/Fredoka.ttf</file>
+    <file alias="fonts/FredokaOne.ttf">/home/icebankyouu/lemonStudys/fonts/FredokaOne.ttf</file>
+    <file alias="sounds/water_drop_sped_up.wav">/home/icebankyouu/lemonStudys/sounds/water_drop_sped_up.wav</file>
+  </qresource>
+</RCC>
+

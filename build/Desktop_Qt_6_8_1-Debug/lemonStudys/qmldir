@@ -1,0 +1,7 @@
+module lemonStudys
+typeinfo applemonStudys.qmltypes
+prefer :/qt/qml/lemonStudys/
+MainMenu 1.0 qml/MainMenu.qml
+PomodoroView 1.0 qml/PomodoroView.qml
+WelcomeScreen 1.0 qml/WelcomeScreen.qml
+

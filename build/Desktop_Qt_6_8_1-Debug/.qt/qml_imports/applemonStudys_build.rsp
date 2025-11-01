@@ -1,0 +1,14 @@
+-rootPath
+/home/icebankyouu/lemonStudys
+-cmake-output
+-output-file
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/.qt/qml_imports/applemonStudys_build.cmake
+-importPath
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/lemonStudys
+-importPath
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug
+-importPath
+/home/icebankyouu/Qt/6.8.1/gcc_64/qml
+-qrcFiles
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/.qt/rcc/qmake_lemonStudys.qrc
+/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/.qt/rcc/applemonStudys_raw_qml_0.qrc
