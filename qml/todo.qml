@@ -13,11 +13,6 @@ Page {
     // Define the property and immediately access the context property
     property var todoModel: todoModelInstance
 
-    // Remove the Component.onCompleted assignment since we're setting it directly above
-    Component.onCompleted: {
-        // You can leave this empty or add other initialization if needed
-    }
-
     // Connection to handle the close signal
     Connections {
         target: todoModel
@@ -43,7 +38,7 @@ Page {
         anchors.margins: 20
         spacing: 15
 
-        // Header Card
+        // Header Stats Card
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 80
@@ -65,12 +60,56 @@ Page {
                 anchors.fill: parent
                 anchors.margins: 20
 
-                Label {
-                    text: "My Tasks"
-                    font.pixelSize: 32
-                    font.bold: true
-                    color: "#2c3e50"
+                Column {
                     Layout.fillWidth: true
+
+                    Label {
+                        text: "Total Tasks"
+                        font.pixelSize: 14
+                        color: "#666"
+                    }
+                    Label {
+                        text: todoModel.rowCount()
+                        font.pixelSize: 28
+                        font.bold: true
+                        color: "#2c3e50"
+                    }
+                }
+
+                Rectangle {
+                    width: 1
+                    Layout.fillHeight: true
+                    color: "#e0e0e0"
+                }
+
+                Column {
+                    Layout.fillWidth: true
+
+                    Label {
+                        text: "Completed"
+                        font.pixelSize: 14
+                        color: "#666"
+                    }
+                    Label {
+                        text: {
+                            let completed = 0;
+                            for (let i = 0; i < todoModel.rowCount(); i++) {
+                                if (todoModel.data(todoModel.index(i, 0), 259)) { // 259 is CompletedRole
+                                    completed++;
+                                }
+                            }
+                            return completed;
+                        }
+                        font.pixelSize: 28
+                        font.bold: true
+                        color: "#27ae60"
+                    }
+                }
+
+                Rectangle {
+                    width: 1
+                    Layout.fillHeight: true
+                    color: "#e0e0e0"
                 }
 
                 Button {
@@ -79,6 +118,9 @@ Page {
                     flat: true
                     Material.foreground: "grey"
                     Layout.preferredWidth: 80
+
+                    ToolTip.visible: hovered
+                    ToolTip.text: "Go back"
 
                     onClicked: {
                         console.log("Back button clicked")
@@ -92,8 +134,8 @@ Page {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 80
-            color: "white"
             radius: 15
+            color: "white"
 
             MultiEffect {
                 anchors.fill: parent
@@ -113,7 +155,7 @@ Page {
                 TextField {
                     id: newTaskInput
                     Layout.fillWidth: true
-                    placeholderText: "Add a new task..."
+                    placeholderText: "Enter new task..."
                     font.pixelSize: 14
                     Material.accent: Material.Green
 
@@ -179,6 +221,10 @@ Page {
                     text: "Clear Completed"
                     Material.background: Material.Orange
                     Material.foreground: "white"
+
+                    ToolTip.visible: hovered
+                    ToolTip.text: "Remove all completed tasks"
+
                     onClicked: todoModel.clearCompleted()
                 }
             }
@@ -201,7 +247,11 @@ Page {
                     color: "white"
                     radius: 15
 
-                    // Filter logic (same as before)
+                    // Border for completed tasks
+                    border.color: model.completed ? "#27ae60" : "transparent"
+                    border.width: 2
+
+                    // Filter logic
                     visible: {
                         if (hideCompleted.checked && model.completed) return false;
 
@@ -229,29 +279,67 @@ Page {
                         shadowVerticalOffset: 2
                     }
 
+                    // Highlight for completed
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: 15
+                        color: model.completed ? "#27ae60" : "transparent"
+                        opacity: 0.1
+                    }
+
                     RowLayout {
                         anchors.fill: parent
                         anchors.margins: 15
                         spacing: 15
 
-                        CheckBox {
-                            checked: model.completed
-                            onToggled: todoModel.markAsCompleted(index, checked)
-                        }
-
-                        ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: 4
-
-                            Text {
-                                text: model.title
-                                font.pixelSize: 16
-                                font.bold: true
-                                font.strikeout: model.completed
-                                color: model.completed ? "#9E9E9E" : "#2c3e50"
+                        // Priority indicator circle
+                        Rectangle {
+                            width: 50
+                            height: 50
+                            radius: 25
+                            color: {
+                                if (model.completed) return "#27ae60"
+                                switch(model.priority) {
+                                    case 2: return "#e74c3c"; // High
+                                    case 1: return "#f39c12"; // Medium
+                                    case 0: return "#95a5a6"; // Low
+                                    default: return "#95a5a6";
+                                }
                             }
 
-                            Text {
+                            Label {
+                                anchors.centerIn: parent
+                                text: {
+                                    if (model.completed) {
+                                        return "✓"
+                                    }
+                                    switch(model.priority) {
+                                        case 2: return "!!"
+                                        case 1: return "!"
+                                        case 0: return "·"
+                                        default: return "·"
+                                    }
+                                }
+                                font.pixelSize: model.completed ? 24 : 20
+                                font.bold: true
+                                color: "white"
+                            }
+                        }
+
+                        // Task Info
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 5
+
+                            Label {
+                                text: model.title
+                                font.pixelSize: 18
+                                font.bold: true
+                                font.strikeout: model.completed
+                                color: model.completed ? "#7f8c8d" : "#2c3e50"
+                            }
+
+                            Label {
                                 text: model.description || "No description"
                                 font.pixelSize: 13
                                 color: "#7f8c8d"
@@ -259,46 +347,75 @@ Page {
                                 visible: model.description !== ""
                             }
 
-                            Text {
-                                text: {
-                                    if (!model.dueDate) return "";
-                                    let date = new Date(model.dueDate);
-                                    return "Due: " + date.toLocaleDateString();
+                            RowLayout {
+                                spacing: 15
+
+                                Label {
+                                    text: {
+                                        if (!model.dueDate) return "";
+                                        let date = new Date(model.dueDate);
+                                        return "Due: " + date.toLocaleDateString();
+                                    }
+                                    font.pixelSize: 13
+                                    color: {
+                                        if (!model.dueDate) return "#7f8c8d";
+                                        let now = new Date();
+                                        let due = new Date(model.dueDate);
+                                        return due < now && !model.completed ? "#e74c3c" : "#7f8c8d";
+                                    }
+                                    visible: model.dueDate !== undefined
                                 }
-                                font.pixelSize: 13
-                                color: {
-                                    if (!model.dueDate) return "#7f8c8d";
-                                    let now = new Date();
-                                    let due = new Date(model.dueDate);
-                                    return due < now && !model.completed ? "#e74c3c" : "#7f8c8d";
+
+                                Label {
+                                    text: {
+                                        switch(model.priority) {
+                                            case 2: return "High Priority"
+                                            case 1: return "Medium Priority"
+                                            case 0: return "Low Priority"
+                                            default: return ""
+                                        }
+                                    }
+                                    font.pixelSize: 12
+                                    color: {
+                                        switch(model.priority) {
+                                            case 2: return "#e74c3c"
+                                            case 1: return "#f39c12"
+                                            case 0: return "#27ae60"
+                                            default: return "#7f8c8d"
+                                        }
+                                    }
                                 }
-                                visible: model.dueDate !== undefined
                             }
                         }
 
-                        Rectangle {
-                            width: 16
-                            height: 16
-                            radius: 8
-                            color: {
-                                switch(model.priority) {
-                                    case 2: return "#e74c3c"; // High
-                                    case 1: return "#f39c12"; // Medium
-                                    case 0: return "#27ae60"; // Low
-                                    default: return "#95a5a6";
-                                }
-                            }
-                        }
-
+                        // Action Buttons
                         RowLayout {
                             spacing: 5
                             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
                             Button {
-                                text: "Edit"
+                                text: model.completed ? "↻" : "✓"
+                                Material.background: model.completed ? Material.Orange : Material.Green
+                                Material.foreground: "white"
+                                Layout.preferredWidth: 50
+
+                                ToolTip.visible: hovered
+                                ToolTip.text: model.completed ? "Mark as incomplete" : "Mark as complete"
+
+                                onClicked: {
+                                    todoModel.markAsCompleted(index, !model.completed)
+                                }
+                            }
+
+                            Button {
+                                text: "✎"
                                 Material.background: Material.Blue
                                 Material.foreground: "white"
-                                Layout.preferredWidth: 60
+                                Layout.preferredWidth: 50
+
+                                ToolTip.visible: hovered
+                                ToolTip.text: "Edit task"
+
                                 onClicked: editDialog.open(index, model.title, model.description, model.dueDate, model.priority)
                             }
 
@@ -307,11 +424,40 @@ Page {
                                 Material.background: Material.Red
                                 Material.foreground: "white"
                                 Layout.preferredWidth: 50
-                                onClicked: todoModel.removeTodo(index)
+
+                                ToolTip.visible: hovered
+                                ToolTip.text: "Delete task"
+
+                                onClicked: {
+                                    deleteDialog.taskIndex = index
+                                    deleteDialog.taskTitle = model.title
+                                    deleteDialog.open()
+                                }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // Delete Confirmation Dialog
+    Dialog {
+        id: deleteDialog
+        property int taskIndex: -1
+        property string taskTitle: ""
+
+        title: "Delete Task?"
+        standardButtons: Dialog.Yes | Dialog.No
+        anchors.centerIn: parent
+
+        Label {
+            text: "Are you sure you want to delete '" + deleteDialog.taskTitle + "'?\nThis action cannot be undone."
+        }
+
+        onAccepted: {
+            if (taskIndex >= 0) {
+                todoModel.removeTodo(taskIndex)
             }
         }
     }
@@ -325,8 +471,6 @@ Page {
         height: Math.min(todoView.height * 0.95, 600)
         anchors.centerIn: Overlay.overlay
         modal: true
-
-
 
         property int currentIndex: -1
         property date selectedDate: new Date()
@@ -475,8 +619,6 @@ Page {
 
         onAccepted: {
             if (editTitle.text.trim() === "") return;
-
-            // Make sure date is updated before sending
             updateSelectedDate();
 
             todoModel.updateTodo(
