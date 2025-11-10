@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/lemonStudys">
-    <file alias="qmldir">/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/lemonStudys/qmldir</file>
-  </qresource>
-</RCC>
-

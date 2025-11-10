@@ -1,6 +1,0 @@
-set(__QT_DEPLOY_TARGET_applemonStudys_FILE /home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys)
-set(__QT_DEPLOY_TARGET_applemonStudys_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_streaks_tests_FILE /home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/streaks_tests)
-set(__QT_DEPLOY_TARGET_streaks_tests_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_streaksmanager_tests_FILE /home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/streaksmanager_tests)
-set(__QT_DEPLOY_TARGET_streaksmanager_tests_TYPE EXECUTABLE)

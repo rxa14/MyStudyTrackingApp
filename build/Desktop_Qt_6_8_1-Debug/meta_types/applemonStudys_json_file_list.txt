@@ -1,6 +1,0 @@
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../BK5Q7ZY7XP/moc_streaks.cpp.json
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../BK5Q7ZY7XP/moc_streaksmanager.cpp.json
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../FLQ666LJE4/moc_todo.cpp.json
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../FLQ666LJE4/moc_todomanager.cpp.json
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../GK43SQADPL/moc_databasemanager.cpp.json
-/home/icebankyouu/lemonStudys/build/Desktop_Qt_6_8_1-Debug/applemonStudys_autogen/include/../KGL5URGMLO/moc_pomodorotimer.cpp.json
