@@ -3,6 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import QtMultimedia 6.2
+import QtQuick.Controls.Material
+import QtQuick.Effects
+import QtQuick.Controls 2.15
 
 ApplicationWindow {
     visible: true
@@ -254,8 +257,39 @@ ApplicationWindow {
                 anchors.margins: 24
                 spacing: 20
 
-                // Music icon
+                // // Music icon
+                // Rectangle {
+                //     width: 50
+                //     height: 50
+                //     radius: 25
+                //     color: "#FFF9F1"
+                //     border.color: "#333333"
+                //     border.width: 1
+
+                //     Text {
+                //         id: name
+                //         text: qsTr("text")
+                //         anchors.centerIn: parent
+                //     }
+
+                //     MouseArea {
+                //         anchors.fill: parent
+                //         cursorShape: Qt.PointingHandCursor
+                //         onClicked: console.log("Music button clicked")
+                //         hoverEnabled: true
+                //         onEntered: {
+                //             parent.scale = 1.02
+                //             hoversound.play()
+
+                //         }
+                //         onExited: parent.scale = 1.0
+                //     }
+                // }
+
+
+                // exit button
                 Rectangle {
+                    id: exitButton
                     width: 50
                     height: 50
                     radius: 25
@@ -263,54 +297,34 @@ ApplicationWindow {
                     border.color: "#333333"
                     border.width: 1
 
-                    Text {
-                        text: "🎵"
+                    Image {
+                        source: "../images/exiticon.png"
                         anchors.centerIn: parent
-                        font.pixelSize: 24
+                        width: 24
+                        height: 24
+                        fillMode: Image.PreserveAspectFit
                     }
 
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: console.log("Music button clicked")
                         hoverEnabled: true
+                        ToolTip.visible: containsMouse
+                        ToolTip.text: "Close Application"
                         onEntered: {
-                            parent.scale = 1.02
+                            exitButton.scale = 1.02
                             hoversound.play()
-
                         }
-                        onExited: parent.scale = 1.0
+                        onExited: exitButton.scale = 1.0
+                        onClicked: {
+                            console.log("Exit button clicked")
+                            Qt.quit()
+                        }
                     }
+
+
                 }
 
-                // Settings icon
-                Rectangle {
-                    width: 50
-                    height: 50
-                    radius: 25
-                    color: "#FFF9F1"
-                    border.color: "#333333"
-                    border.width: 1
-
-                    Text {
-                        text: "⚙️"
-                        anchors.centerIn: parent
-                        font.pixelSize: 24
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: console.log("Settings button clicked")
-                        hoverEnabled: true
-                        onEntered: {
-                            parent.scale = 1.02
-                            hoversound.play()
-
-                        }
-                        onExited: parent.scale = 1.0
-                    }
-                }
             }
         }
     }
