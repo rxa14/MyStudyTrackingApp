@@ -10,6 +10,11 @@ Page {
     id: todoView
     anchors.fill: parent
 
+    FontLoader {
+        id: fredoka
+        source: "../fonts/Fredoka.ttf"
+    }
+
     // Define the property and immediately access the context property
     property var todoModel: todoModelInstance
 
@@ -22,6 +27,7 @@ Page {
             }
         }
     }
+
 
     // Background
     Rectangle {
@@ -43,8 +49,17 @@ Page {
             Layout.fillWidth: true
             Layout.preferredHeight: 80
             radius: 15
-            color: "white"
-            border.color: "black"
+            // color: "white"
+            // border.color: "black"
+
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                shadowEnabled: true
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
+                shadowHorizontalOffset: 0
+                shadowVerticalOffset: 6
+            }
 
             MultiEffect {
                 anchors.fill: parent
@@ -67,12 +82,14 @@ Page {
                         text: "Total Tasks"
                         font.pixelSize: 14
                         color: "#666"
+                        font.family: fredoka.name
                     }
                     Label {
                         text: todoModel.rowCount()
                         font.pixelSize: 28
                         font.bold: true
                         color: "#2c3e50"
+                        font.family: fredoka.name
                     }
                 }
 
@@ -89,13 +106,14 @@ Page {
                         text: "Completed"
                         font.pixelSize: 14
                         color: "#666"
+                        font.family: fredoka.name
+
                     }
                     Label {
                         text: {
                             let completed = 0;
                             for (let i = 0; i < todoModel.rowCount(); i++) {
-                                if (todoModel.data(todoModel.index(i, 0), 259)) { // 259 is CompletedRole
-                                    completed++;
+                                if (todoModel.data(todoModel.index(i, 0), 259)) {
                                 }
                             }
                             return completed;
@@ -118,6 +136,8 @@ Page {
                     flat: true
                     Material.foreground: "grey"
                     Layout.preferredWidth: 80
+                    font.family: fredoka.name
+
 
                     ToolTip.visible: hovered
                     ToolTip.text: "Go back"
@@ -136,6 +156,15 @@ Page {
             Layout.preferredHeight: 80
             radius: 15
             color: "white"
+
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                shadowEnabled: true
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
+                shadowHorizontalOffset: 0
+                shadowVerticalOffset: 6
+            }
 
             MultiEffect {
                 anchors.fill: parent
@@ -157,7 +186,9 @@ Page {
                     Layout.fillWidth: true
                     placeholderText: "Enter new task..."
                     font.pixelSize: 14
-                    Material.accent: Material.Green
+                    Material.accent: "#333333"
+                    font.family: fredoka.name
+
 
                     onAccepted: {
                         if (text.trim() !== "") {
@@ -169,15 +200,17 @@ Page {
 
                 Button {
                     text: "Add Task"
+                    font.family: fredoka.name
                     enabled: newTaskInput.text.trim() !== ""
-                    Material.background: Material.Blue
-                    Material.foreground: "white"
+                    Material.background: "#FFDE59"
+                    Material.foreground: "#333333"
                     onClicked: {
                         if (newTaskInput.text.trim() !== "") {
                             todoModel.addTodo(newTaskInput.text, "", new Date(), 1)
                             newTaskInput.text = ""
                         }
                     }
+
                 }
             }
         }
@@ -189,14 +222,13 @@ Page {
             color: "white"
             radius: 15
 
-            MultiEffect {
-                anchors.fill: parent
-                source: parent
+            layer.enabled: true
+            layer.effect: MultiEffect {
                 shadowEnabled: true
-                shadowColor: "#20000000"
-                shadowBlur: 0.4
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
                 shadowHorizontalOffset: 0
-                shadowVerticalOffset: 2
+                shadowVerticalOffset: 6
             }
 
             RowLayout {
@@ -208,23 +240,29 @@ Page {
                     id: priorityFilter
                     model: ["All Priorities", "High", "Medium", "Low"]
                     Layout.preferredWidth: 150
+                    font.family: fredoka.name
+                    Material.accent: "#333333"
+
                 }
 
                 CheckBox {
                     id: hideCompleted
                     text: "Hide Completed"
+                    font.family: fredoka.name
+                    Material.accent: "#FFDE59"
+
                 }
 
                 Item { Layout.fillWidth: true }
 
                 Button {
                     text: "Clear Completed"
-                    Material.background: Material.Orange
-                    Material.foreground: "white"
+                    Material.background: "#FFDE59"
+                    Material.foreground: "#333333"
 
                     ToolTip.visible: hovered
                     ToolTip.text: "Remove all completed tasks"
-
+                    font.family: fredoka.name
                     onClicked: todoModel.clearCompleted()
                 }
             }
@@ -235,6 +273,15 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                shadowEnabled: true
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
+                shadowHorizontalOffset: 0
+                shadowVerticalOffset: 6
+            }
 
             ListView {
                 id: todoList
@@ -320,6 +367,7 @@ Page {
                                         default: return "·"
                                     }
                                 }
+                                font.family: fredoka.name
                                 font.pixelSize: model.completed ? 24 : 20
                                 font.bold: true
                                 color: "white"
@@ -337,6 +385,8 @@ Page {
                                 font.bold: true
                                 font.strikeout: model.completed
                                 color: model.completed ? "#7f8c8d" : "#2c3e50"
+                                font.family: fredoka.name
+
                             }
 
                             Label {
@@ -345,6 +395,8 @@ Page {
                                 color: "#7f8c8d"
                                 elide: Text.ElideRight
                                 visible: model.description !== ""
+                                font.family: fredoka.name
+
                             }
 
                             RowLayout {
@@ -364,6 +416,8 @@ Page {
                                         return due < now && !model.completed ? "#e74c3c" : "#7f8c8d";
                                     }
                                     visible: model.dueDate !== undefined
+                                    font.family: fredoka.name
+
                                 }
 
                                 Label {
@@ -384,6 +438,8 @@ Page {
                                             default: return "#7f8c8d"
                                         }
                                     }
+                                    font.family: fredoka.name
+
                                 }
                             }
                         }
@@ -405,6 +461,8 @@ Page {
                                 onClicked: {
                                     todoModel.markAsCompleted(index, !model.completed)
                                 }
+                                font.family: fredoka.name
+
                             }
 
                             Button {
@@ -417,6 +475,8 @@ Page {
                                 ToolTip.text: "Edit task"
 
                                 onClicked: editDialog.open(index, model.title, model.description, model.dueDate, model.priority)
+                                font.family: fredoka.name
+
                             }
 
                             Button {
@@ -433,6 +493,8 @@ Page {
                                     deleteDialog.taskTitle = model.title
                                     deleteDialog.open()
                                 }
+                                font.family: fredoka.name
+
                             }
                         }
                     }
@@ -446,6 +508,7 @@ Page {
         id: deleteDialog
         property int taskIndex: -1
         property string taskTitle: ""
+        Material.accent: "#333333"
 
         title: "Delete Task?"
         standardButtons: Dialog.Yes | Dialog.No
@@ -460,6 +523,8 @@ Page {
                 todoModel.removeTodo(taskIndex)
             }
         }
+        font.family: fredoka.name
+
     }
 
     // Dialog for editing tasks
@@ -471,6 +536,8 @@ Page {
         height: Math.min(todoView.height * 0.95, 600)
         anchors.centerIn: Overlay.overlay
         modal: true
+        font.family: fredoka.name
+        Material.accent: "#333333"
 
         property int currentIndex: -1
         property date selectedDate: new Date()
@@ -511,17 +578,23 @@ Page {
                 Label {
                     text: "Title:"
                     font.bold: true
+                    font.family: fredoka.name
+
                 }
 
                 TextField {
                     id: editTitle
                     Layout.fillWidth: true
                     placeholderText: "Task title"
+                    font.family: fredoka.name
+
                 }
 
                 Label {
                     text: "Description:"
                     font.bold: true
+                    font.family: fredoka.name
+
                 }
 
                 TextArea {
@@ -530,11 +603,15 @@ Page {
                     Layout.preferredHeight: 80
                     placeholderText: "Task description"
                     wrapMode: TextEdit.Wrap
+                    font.family: fredoka.name
+
                 }
 
                 Label {
                     text: "Due Date:"
                     font.bold: true
+                    font.family: fredoka.name
+
                 }
 
                 // Custom date selector using basic components
@@ -563,7 +640,7 @@ Page {
                         model: ["January", "February", "March", "April", "May", "June", "July",
                                "August", "September", "October", "November", "December"]
                         Layout.preferredWidth: 120
-
+                        font.family: fredoka.name
                         onCurrentIndexChanged: {
                             // Adjust days in month based on selected month
                             let year = parseInt(yearField.text) || new Date().getFullYear();
@@ -590,12 +667,16 @@ Page {
                                 editDialog.updateSelectedDate();
                             }
                         }
+                        font.family: fredoka.name
+
                     }
                 }
 
                 Label {
                     text: "Priority:"
                     font.bold: true
+                    font.family: fredoka.name
+
                 }
 
                 ComboBox {
