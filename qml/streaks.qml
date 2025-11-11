@@ -21,6 +21,12 @@ Page {
         }
     }
 
+    FontLoader {
+        id: fredoka
+        source: "../fonts/Fredoka.ttf"
+    }
+
+
     // Background
     Rectangle {
         anchors.fill: parent
@@ -42,18 +48,16 @@ Page {
             Layout.preferredHeight: 80
             radius: 15
             color: "white"
-            border.color: "black"
+            //border.color: "black"
 
-            MultiEffect {
-                anchors.fill: parent
-                source: parent
+            layer.enabled: true
+            layer.effect: MultiEffect {
                 shadowEnabled: true
-                shadowColor: "#20000000"
-                shadowBlur: 0.4
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
                 shadowHorizontalOffset: 0
-                shadowVerticalOffset: 2
+                shadowVerticalOffset: 6
             }
-
 
             RowLayout {
                 anchors.fill: parent
@@ -66,6 +70,8 @@ Page {
                         text: "Total Habits"
                         font.pixelSize: 14
                         color: "#666"
+                        font.family: fredoka.name
+
                     }
                     Label {
                         text: streaksModelInstance.totalStreaks
@@ -88,12 +94,16 @@ Page {
                         text: "Active Today"
                         font.pixelSize: 14
                         color: "#666"
+                        font.family: fredoka.name
+
                     }
                     Label {
                         text: streaksModelInstance.activeStreaks
                         font.pixelSize: 28
                         font.bold: true
                         color: "#27ae60"
+                        font.family: fredoka.name
+
                     }
                 }
 
@@ -126,6 +136,15 @@ Page {
             radius: 15
             color: "white"
 
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                shadowEnabled: true
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
+                shadowHorizontalOffset: 0
+                shadowVerticalOffset: 6
+            }
+
             RowLayout {
                 anchors.fill: parent
                 anchors.margins: 10
@@ -135,8 +154,9 @@ Page {
                     id: newStreakInput
                     Layout.fillWidth: true
                     placeholderText: "Enter new habit to track..."
+                    font.family: fredoka.name
                     font.pixelSize: 14
-                    Material.accent: Material.Green
+                    Material.accent: "#333333"
                     onAccepted: {
                         if (text.length > 0) {
                             streaksModelInstance.addStreak(text)
@@ -148,8 +168,10 @@ Page {
                 Button {
                     text: "Add Habit"
                     enabled: newStreakInput.text.length > 0
-                    Material.background: Material.Blue
-                    Material.foreground: "white"
+                    Material.background: "#FFDE59"
+                    Material.foreground: "#333333"
+                    font.family: fredoka.name
+
 
                     onClicked: {
                         streaksModelInstance.addStreak(newStreakInput.text)
@@ -164,6 +186,16 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
+
+
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                shadowEnabled: true
+                shadowColor: "#50000000"
+                shadowBlur: 1.5
+                shadowHorizontalOffset: 0
+                shadowVerticalOffset: 6
+            }
 
             ListView {
                 id: streaksList
@@ -233,6 +265,8 @@ Page {
                                 font.pixelSize: 20
                                 font.bold: true
                                 color: "white"
+                                font.family: fredoka.name
+
                             }
                         }
 
@@ -246,6 +280,10 @@ Page {
                                 font.pixelSize: 18
                                 font.bold: true
                                 color: "#2c3e50"
+                                font.family: {
+                                    fredoka.name
+                                }
+
                             }
 
                             RowLayout {
@@ -255,12 +293,16 @@ Page {
                                     text: "Current: " + model.streakDuration + " days"
                                     font.pixelSize: 13
                                     color: "#7f8c8d"
+                                    font.family: fredoka.name
+
                                 }
 
                                 Label {
                                     text: "Best: " + model.bestStreak + " days"
                                     font.pixelSize: 13
                                     color: "#7f8c8d"
+                                    font.family: fredoka.name
+
                                 }
                             }
 
@@ -277,6 +319,8 @@ Page {
                                     else if (model.isStreakBroken) return "#e74c3c"
                                     else return "#f39c12"
                                 }
+                                font.family: fredoka.name
+
                             }
                         }
 
@@ -298,6 +342,8 @@ Page {
                                 onClicked: {
                                     streaksModelInstance.incrementStreak(index)
                                 }
+                                font.family: fredoka.name
+
                             }
 
                             Button {
@@ -314,6 +360,8 @@ Page {
                                     resetDialog.streakTitle = model.title
                                     resetDialog.open()
                                 }
+                                font.family: fredoka.name
+
                             }
 
                             Button {
@@ -330,6 +378,8 @@ Page {
                                     deleteDialog.streakTitle = model.title
                                     deleteDialog.open()
                                 }
+                                font.family: fredoka.name
+
                             }
                         }
                     }
@@ -378,5 +428,6 @@ Page {
                 streaksModelInstance.removeStreak(streakIndex)
             }
         }
+        Material.accent: "#333333"
     }
 }
