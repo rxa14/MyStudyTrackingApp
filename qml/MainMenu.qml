@@ -297,6 +297,15 @@ ApplicationWindow {
                     border.color: "#333333"
                     border.width: 1
 
+                    layer.enabled: true
+                    layer.effect: DropShadow {
+                        horizontalOffset: 0
+                        verticalOffset: 3
+                        radius: 8
+                        samples: 17
+                        color: "#40000000"
+                    }
+
                     Image {
                         source: "../images/exiticon.png"
                         anchors.centerIn: parent
@@ -309,8 +318,6 @@ ApplicationWindow {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         hoverEnabled: true
-                        ToolTip.visible: containsMouse
-                        ToolTip.text: "Close Application"
                         onEntered: {
                             exitButton.scale = 1.02
                             hoversound.play()
