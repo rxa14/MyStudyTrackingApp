@@ -205,7 +205,7 @@ ApplicationWindow {
                     }
                 }
 
-                // Calendar button
+                // Block button
                 Rectangle {
                     width: parent.width
                     height: 96
@@ -224,7 +224,7 @@ ApplicationWindow {
                     }
 
                     Text {
-                        text: "Calendar"
+                        text: "Block Distractions"
                         anchors.centerIn: parent
                         font.pixelSize: 36
                         font.family: fredoka.name
