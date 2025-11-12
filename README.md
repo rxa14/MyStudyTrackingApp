@@ -75,7 +75,7 @@ lemonStudys/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/lemonStudys.git
+git clone https://github.com/rxa14/MyStudyTrackingApp.git
 cd lemonStudys
 ```
 
