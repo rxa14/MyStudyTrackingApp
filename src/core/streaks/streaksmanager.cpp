@@ -113,11 +113,9 @@ void streaksManager::addStreak(const QString &title)
         return;
     }
 
-    // Get the newly created streak data
     QVector<QVariantMap> allStreaks = DatabaseManager::instance().loadAllStreaks();
     if (allStreaks.isEmpty()) return;
 
-    // Find the streak we just added (last one with matching title)
     QVariantMap newStreakData;
     for (auto it = allStreaks.rbegin(); it != allStreaks.rend(); ++it) {
         if (it->value("title").toString() == title) {
@@ -242,7 +240,6 @@ void streaksManager::loadStreaksFromDatabase()
 {
     beginResetModel();
 
-    // Clear existing streaks
     qDeleteAll(m_streaks);
     m_streaks.clear();
 
@@ -254,7 +251,6 @@ void streaksManager::loadStreaksFromDatabase()
         streak->setId(data["id"].toInt());
         streak->setStreakDuration(data["streakDuration"].toInt());
         streak->setLastActivity(data["lastActivity"].toDateTime());
-        // bestStreak will be updated by setStreakDuration if needed
         streak->setBestStreak(data["bestStreak"].toInt());
 
         m_streaks.append(streak);
@@ -271,7 +267,6 @@ void streaksManager::saveStreakToDatabase(Streaks *streak)
         return;
     }
 
-    // Don't save if already has an ID (already in database)
     if (streak->id() != -1) {
         qDebug() << "Streak already exists in database with ID:" << streak->id();
         return;
@@ -290,7 +285,6 @@ void streaksManager::saveStreakToDatabase(Streaks *streak)
         return;
     }
 
-    // Get the new ID and assign it to the streak
     QSqlQuery query("SELECT last_insert_rowid()");
     if (query.next()) {
         int newId = query.value(0).toInt();
@@ -361,7 +355,6 @@ void streaksManager::deleteStreakFromDatabase(int id)
 void streaksManager::setupDailyResetTimer() {
     m_dailyResetTimer = new QTimer(this);
 
-    // Check every hour (3600000 ms) for expired streaks
     m_dailyResetTimer->setInterval(3600000);
 
     connect(m_dailyResetTimer, &QTimer::timeout,
@@ -369,7 +362,6 @@ void streaksManager::setupDailyResetTimer() {
 
     m_dailyResetTimer->start();
 
-    // Also check immediately on startup
     checkAndResetExpiredStreaks();
 }
 
@@ -379,7 +371,6 @@ void streaksManager::checkAndResetExpiredStreaks() {
     for (int i = 0; i < m_streaks.size(); ++i) {
         Streaks *streak = m_streaks[i];
 
-        // If more than 24 hours have passed since last activity
         if (streak->lastActivity().secsTo(now) > 86400) { // 86400 seconds = 24 hours
             if (streak->streakDuration() > 0) {
                 streak->setStreakDuration(0);  // Reset to 0

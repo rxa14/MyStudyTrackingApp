@@ -23,7 +23,7 @@ Page {
 
     FontLoader {
         id: fredoka
-        source: "../fonts/Fredoka.ttf"
+        source: "../assets/fonts/Fredoka.ttf"
     }
 
 

@@ -46,8 +46,8 @@ public:
     Priority priority() const;
     void setPriority(Priority priority);
 
-    int id() const;  // Add this
-    void setId(int id);  // Add this
+    int id() const;
+    void setId(int id);
 
 signals:
     void titleChanged();
@@ -55,15 +55,14 @@ signals:
     void dueDateChanged();
     void completedChanged();
     void priorityChanged();
-    void idChanged();  // Add this
-
+    void idChanged();
 private:
     QString m_title;
     QString m_description;
     QDateTime m_dueDate;
     bool m_completed;
     Priority m_priority;
-    int m_id;  // Add this
+    int m_id;
 };
 
 

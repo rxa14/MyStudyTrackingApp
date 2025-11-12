@@ -21,15 +21,16 @@ qt_add_qml_module(applemonStudys
         SOURCES src/core/pomodoro/pomodorotimer.h src/core/pomodoro/pomodorotimer.cpp
         QML_FILES qml/todo.qml
         SOURCES src/core/todo/todo.h src/core/todo/todo.cpp
-        QML_FILES qml/test.qml
+        QML_FILES
         SOURCES src/core/database/databasemanager.cpp
         SOURCES src/core/database/databasemanager.h
-        QML_FILES qml/WelcomeScreen.qml
+        QML_FILES
         SOURCES src/core/streaks/streaks.h src/core/streaks/streaks.cpp
         QML_FILES qml/streaks.qml
-        RESOURCES fonts/Fredoka.ttf
-        RESOURCES fonts/FredokaOne.ttf
-        RESOURCES sounds/water_drop_sped_up.wav
+        RESOURCES assets/fonts/Fredoka.ttf
+        RESOURCES assets/fonts/FredokaOne.ttf
+        RESOURCES assets/sounds/water_drop_sped_up.wav
+        RESOURCES assets/images/exiticon.png
         SOURCES src/core/streaks/streaksmanager.h src/core/streaks/streaksmanager.cpp
         SOURCES src/core/todo/todomanager.h src/core/todo/todomanager.cpp
 )

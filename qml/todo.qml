@@ -12,7 +12,7 @@ Page {
 
     FontLoader {
         id: fredoka
-        source: "../fonts/Fredoka.ttf"
+        source: "../assets/fonts/Fredoka.ttf"
     }
 
     // Define the property and immediately access the context property
@@ -604,6 +604,23 @@ Page {
                     placeholderText: "Task description"
                     wrapMode: TextEdit.Wrap
                     font.family: fredoka.name
+                    onTextChanged: {
+                        var cursor = cursorPosition
+                        var cleanText = text
+
+                        // Remove all newlines
+                        cleanText = cleanText.replace(/\n/g, ' ')
+
+                        // Limit to 100 characters
+                        if (cleanText.length > 100) {
+                            cleanText = cleanText.substring(0, 100)
+                        }
+
+                        if (cleanText !== text) {
+                            text = cleanText
+                            cursorPosition = Math.min(cursor, cleanText.length)
+                        }
+                        }
 
                 }
 

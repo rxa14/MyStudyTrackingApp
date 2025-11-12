@@ -22,17 +22,17 @@ ApplicationWindow {
     // Fontloader to load a custom font.
     FontLoader {
         id: fredoka
-        source: "../fonts/Fredoka.ttf"
+        source: "../assets/fonts/Fredoka.ttf"
     }
 
     FontLoader {
         id: fredokaOne
-        source: "../fonts/FredokaOne.ttf"
+        source: "../assets/fonts/FredokaOne.ttf"
     }
 
     SoundEffect {
         id: hoversound
-        source: "../sounds/water_drop_sped_up.wav"
+        source: "../assets/sounds/water_drop_sped_up.wav"
         // Source: https://freesound.org/people/deleted_user_2104797/sounds/166322/
         volume: 0.5
     }
@@ -307,7 +307,7 @@ ApplicationWindow {
                     }
 
                     Image {
-                        source: "../images/exiticon.png"
+                        source: "../assets/images/exiticon.png"
                         anchors.centerIn: parent
                         width: 24
                         height: 24
