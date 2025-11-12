@@ -76,7 +76,7 @@ lemonStudys/
 1. Clone the repository:
 ```bash
 git clone https://github.com/rxa14/MyStudyTrackingApp.git
-cd lemonStudys
+cd MyStudyTrackingApp
 ```
 
 2. Create build directory:
